@@ -66,6 +66,19 @@ function normalizar(texto) {
     .toLowerCase();
 }
 
+const franquias = [
+  ["Maze Runner", "Maze Runner: Prova de Fogo", "Maze Runner: A Cura Mortal"],
+  ["Jogos Vorazes", "Jogos Vorazes: Em Chamas", "Jogos Vorazes: A Esperança"],
+  ["Pantera Negra", "Pantera Negra: Wakanda Foreve"],
+  ["Top Gun", "Top Gun: Maverick"],
+  [
+    "Guardiões da Galáxia",
+    "Guardiões da Galáxia Vol. 2",
+    "Guardiões da Galáxia Vol. 3",
+  ],
+  ["Avatar", "Avatar: O Caminho da Água", "Avatar: Fogo e Cinzas"],
+];
+
 const filmes = Object.entries(filmesPorCategoria).flatMap(([pagina, titulos]) =>
   titulos.map((titulo) => ({ titulo, pagina })),
 );
@@ -119,10 +132,22 @@ if (tituloBuscado) {
   const cardEncontrado = tituloEncontrado?.closest(".card");
 
   if (cardEncontrado) {
+    const franquiaEncontrada = franquias.find((franquia) =>
+      franquia.some(
+        (titulo) => normalizar(titulo) === normalizar(tituloBuscado),
+      ),
+    );
+    const titulosVisiveis = new Set(
+      (franquiaEncontrada ?? [tituloBuscado]).map(normalizar),
+    );
+
     document.querySelectorAll(".card-title").forEach((elemento) => {
       elemento
         .closest(".col-md-3")
-        ?.classList.toggle("d-none", elemento !== tituloEncontrado);
+        ?.classList.toggle(
+          "d-none",
+          !titulosVisiveis.has(normalizar(elemento.textContent)),
+        );
     });
     cardEncontrado.classList.add("border-success", "border-3");
     requestAnimationFrame(() => {
