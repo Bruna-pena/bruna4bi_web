@@ -1,62 +1,3 @@
-const filmesPorCategoria = {
-  "acao.html": [
-    "Maze Runner",
-    "Maze Runner: Prova de Fogo",
-    "Maze Runner: A Cura Mortal",
-    "Jogos Vorazes",
-    "Jogos Vorazes: Em Chamas",
-    "Jogos Vorazes: A Esperança",
-    "Malévola",
-    "Pantera Negra",
-    "Pantera Negra: Wakanda Foreve",
-    "Top Gun",
-    "Top Gun: Maverick",
-    "Branca de Neve e o Caçador",
-  ],
-  "comedia.html": [
-    "As branquelas",
-    "Gente Grande",
-    "Os Farofeiros",
-    "Esqueceram de mim",
-    "Friends",
-    "Todo Mundo Odeia o Chris",
-    "Família Moderna",
-    "iCarly",
-    "Jessie",
-    "Minha Melhor Amiga",
-    "Como Eu Conheci Sua Mãe",
-    "Minha Mãe é uma Peça",
-  ],
-  "ficcao_cient.html": [
-    "Guardiões da Galáxia",
-    "Guardiões da Galáxia Vol. 2",
-    "Guardiões da Galáxia Vol. 3",
-    "Avatar",
-    "Avatar: O Caminho da Água",
-    "Avatar: Fogo e Cinzas",
-    "Interestelar",
-    "Matrix",
-    "Ex Machina",
-    "Os Escolhidos",
-    "Transformers",
-    "Círculo de Fogo",
-  ],
-  "romances.html": [
-    "10 coisas que eu odeio em você",
-    "Continência ao Amor",
-    "Ela dança eu danço",
-    "O último nascer do sol",
-    "Velocidade e paixão",
-    "Atraídos pelo destino",
-    "Mensagens para Isabelle",
-    "A Paris errada",
-    "Meu ano em Oxford",
-    "A lista da minha vida",
-    "Beijar é a parte fácil",
-    "Vestida para casar",
-  ],
-};
-
 function normalizar(texto) {
   return texto
     .normalize("NFD")
@@ -79,8 +20,8 @@ const franquias = [
   ["Avatar", "Avatar: O Caminho da Água", "Avatar: Fogo e Cinzas"],
 ];
 
-const filmes = Object.entries(filmesPorCategoria).flatMap(([pagina, titulos]) =>
-  titulos.map((titulo) => ({ titulo, pagina })),
+const filmes = Object.entries(filmesPorCategoria).flatMap(([pagina, lista]) =>
+  lista.map(({ titulo }) => ({ titulo, pagina })),
 );
 
 function buscarFilme(termo) {
